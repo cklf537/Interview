@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import RatingCard from "./RatingScale";
+import { connect } from "react-redux";
 
 class Feedback extends Component {
-  constructor() {
-    super();
-  }
   render() {
+    const { technologies } = this.props;
     return (
       <div>
         <p className="h4">Candidate Evaluation Form</p>
@@ -51,7 +50,39 @@ class Feedback extends Component {
                 placeholder="HR Spoc Name"
               />
             </div>
-            <RatingCard />
+            {/* <RatingCard rating={this.props.rating} /> */}
+            <div className="card col-md-12">
+              <div className="card-header">Technologies</div>
+              <div className="card-body">
+                <div class="form-group col-md-4 float-left">
+                  <select class="form-control" id="exampleFormControlSelect1">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-4 float-left">
+                  <select class="form-control" id="exampleFormControlSelect2">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-4 float-left">
+                  <select class="form-control" id="exampleFormControlSelect3">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -59,4 +90,12 @@ class Feedback extends Component {
   }
 }
 
-export default Feedback;
+const mapStateToProps = state => {
+  const { rating, technologies } = state;
+  return {
+    rating,
+    technologies
+  };
+};
+
+export default connect(mapStateToProps)(Feedback);
