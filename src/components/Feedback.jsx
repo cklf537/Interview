@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import RatingCard from "./RatingScale";
 import { connect } from "react-redux";
+import FeedbackForm from "./FeedbackForm";
+import { addTehnology } from "../actions/feedActions";
 
 class Feedback extends Component {
+  handelClick = () => {
+    console.log(this.props);
+    this.props.addT(this.props.defaultTechStack[0]);
+    this.setState(this.props);
+  };
   render() {
-    const { technologies } = this.props;
+    const { rating, defaultTechStack } = this.props;
     return (
       <div>
         <p className="h4">Candidate Evaluation Form</p>
@@ -50,37 +57,19 @@ class Feedback extends Component {
                 placeholder="HR Spoc Name"
               />
             </div>
-            {/* <RatingCard rating={this.props.rating} /> */}
+            <RatingCard rating={rating} />
             <div className="card col-md-12">
               <div className="card-header">Technologies</div>
               <div className="card-body">
-                <div class="form-group col-md-4 float-left">
-                  <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-                <div class="form-group col-md-4 float-left">
-                  <select class="form-control" id="exampleFormControlSelect2">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-                <div class="form-group col-md-4 float-left">
-                  <select class="form-control" id="exampleFormControlSelect3">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
+                {defaultTechStack.map(count => {
+                  return (
+                    <FeedbackForm
+                      handelClick={this.handelClick}
+                      count={count}
+                      key={count}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -91,11 +80,23 @@ class Feedback extends Component {
 }
 
 const mapStateToProps = state => {
-  const { rating, technologies } = state;
+  const { rating, technologies, defaultTechStack } = state.feedback;
   return {
     rating,
-    technologies
+    technologies,
+    defaultTechStack
   };
 };
 
-export default connect(mapStateToProps)(Feedback);
+const mapDispatchToProps = dispatch => {
+  return {
+    addT: count => {
+      dispatch(addTehnology(count));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Feedback);

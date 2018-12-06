@@ -2,6 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 
 const Navigation = props => {
+  debugger;
   const { navigation } = props;
   return (
     <React.Fragment>

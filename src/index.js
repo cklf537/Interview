@@ -3,12 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
-import InterviewReducer from "./reducer/actions";
-import initialState from "./reducer/state";
+import FeedbackFormReducer from "./reducer/feedbackReducer";
+import InterviewReducer from "./reducer/interviewReducer";
 
-const store = createStore(InterviewReducer, initialState);
+const reducers = combineReducers({
+  interview: InterviewReducer,
+  feedback: FeedbackFormReducer
+});
+
+const store = createStore(reducers);
 
 ReactDOM.render(
   <Provider store={store}>

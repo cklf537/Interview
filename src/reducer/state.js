@@ -1,4 +1,4 @@
-const initialState = {
+const iniState = {
   title: "Interview Feedback Form",
   navigation: ["Dashboard", "Feedback"],
   rating: [
@@ -30,7 +30,8 @@ const initialState = {
     { technology: "CSS/BootStrap/ResponsiveDesign" },
     { technology: "Testing Tools", version: ["Karma", "Jasmin"] },
     { technology: "Sub Version", version: ["GIT", "SVN"] }
-  ]
+  ],
+  defaultTechStack: [1]
 };
 
-export default initialState;
+export default iniState;

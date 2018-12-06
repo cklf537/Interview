@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 
 class App extends Component {
   render() {
+    debugger;
     return (
       <BrowserRouter>
         <div className="container">
@@ -21,7 +22,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { title, navigation, rating } = state;
+  const { title, navigation, rating } = state.interview;
   return { title, navigation, rating };
 };
 
